@@ -94,6 +94,12 @@ class Ffmpeg < Formula
     sha256 "57e26caced5a1382cb639235f9555fc50e45e7bf8333f7c9ae3d49b3241d3f77"
   end
 
+  # Patch to support HEVC in FLV format
+  patch do
+    url "https://github.com/yt-dlp/FFmpeg-Builds/blob/master/patches/ffmpeg/master/0001-Nonstandard-HEVC-over-FLV.patch"
+    sha256 "1e1f977ca95968e1e6f50a36865b82ab505fb0190765d856e520604107644ca6"
+  end
+
   def install
     # The new linker leads to duplicate symbol issue https://github.com/homebrew-ffmpeg/homebrew-ffmpeg/issues/140
     ENV.append "LDFLAGS", "-Wl,-ld_classic" if DevelopmentTools.clang_build_version >= 1500
